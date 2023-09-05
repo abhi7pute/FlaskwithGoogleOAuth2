@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login with Google</title>
+    <!-- Add any necessary CSS styles here -->
+</head>
+<body>
+    <h1>Login with Google</h1>
+    <p>Click the button below to log in using your Google account:</p>
+    
+    <!-- Google OAuth login button -->
+    <a href="{{ url_for('google_login') }}">
+        <img src="https://developers.google.com/identity/images/btn_google_signin_dark_normal_web.png" alt="Sign in with Google">
+    </a>
+    
+    <!-- Add any additional content or styling as needed -->
+</body>
+</html>

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dashboard</title>
+</head>
+<body>
+    <h1>Welcome to Your Dashboard</h1>
+    
+    {% if 'google_token' in session %}
+        <p>Hello, {{ user_info['name'] }}!</p>
+        <p>You are logged in.</p>
+        <a href="{{ url_for('logout') }}">Log out</a>
+        <br>
+        <a href="{{ url_for('protected_route') }}">Go to Protected Page</a>
+        <!-- Add more dashboard content here -->
+    {% else %}
+        <p>You are not logged in.</p>
+        <a href="{{ url_for('login') }}">Log in with Google</a>
+    {% endif %}
+</body>
+</html>

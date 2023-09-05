@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Uploaded Image</title>
+    <style>
+        /* Add your CSS for zoom functionality here */
+        .image-container {
+            position: relative;
+            max-width: 100%;
+        }
+
+        .image-container img {
+            width: 100%;
+            height: auto;
+        }
+
+        .zoom-overlay {
+            display: none;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+        }
+
+        .zoom-image {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            max-width: 80%;
+            max-height: 80%;
+        }
+    </style>
+</head>
+<body>
+    <h1>Uploaded Image</h1>
+    
+    <div class="image-container">
+        <img src="{{ url_for('static', filename='uploads/' + image_name) }}" alt="Uploaded Image">
+        
+        <!-- Zoom overlay and zoomed-in image (initially hidden) -->
+        <div class="zoom-overlay" id="zoomOverlay">
+            <img class="zoom-image" id="zoomImage" src="{{ url_for('static', filename='uploads/' + image_name) }}" alt="Zoomed Image">
+        </div>
+    </div>
+
+    <!-- Add JavaScript for zoom functionality -->
+    <script>
+        const imageContainer = document.querySelector('.image-container');
+        const zoomOverlay = document.getElementById('zoomOverlay');
+        const zoomImage = document.getElementById('zoomImage');
+
+        // Show the zoomed-in image on mouse hover
+        imageContainer.addEventListener('mouseenter', () => {
+            zoomOverlay.style.display = 'block';
+        });
+
+        // Hide the zoomed-in image on mouse out
+        imageContainer.addEventListener('mouseleave', () => {
+            zoomOverlay.style.display = 'none';
+        });
+
+        // Move the zoomed-in image with mouse movement for a magnifying effect
+        imageContainer.addEventListener('mousemove', (e) => {
+            const offsetX = e.clientX - imageContainer.getBoundingClientRect().left;
+            const offsetY = e.clientY - imageContainer.getBoundingClientRect().top;
+            
+            const zoomX = (offsetX / imageContainer.offsetWidth) * 100;
+            const zoomY = (offsetY / imageContainer.offsetHeight) * 100;
+            
+            zoomImage.style.transform = `translate(-${zoomX}%, -${zoomY}%)`;
+        });
+    </script>
+</body>
+</html>

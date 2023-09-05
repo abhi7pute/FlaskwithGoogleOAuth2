@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Home</title>
+</head>
+<body>
+    <h1>Welcome to Your App</h1>
+    
+    {% if 'google_token' not in session %}
+        <p>You are not logged in.</p>
+        <a href="{{ url_for('login') }}">Log in with Google</a>
+    {% else %}
+        <p>Hello, {{ user_info['name'] }}!</p>
+        <p>You are logged in.</p>
+        <a href="{{ url_for('logout') }}">Log out</a>
+        <br>
+        <a href="{{ url_for('protected_route') }}">Go to Protected Page</a>
+    {% endif %}
+</body>
+</html>
